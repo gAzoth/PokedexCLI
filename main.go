@@ -1,5 +1,16 @@
 package main
 
+import (
+	"time"
+
+	"github.com/gAzoth/PokedexCLI/internal/pokeapi"
+)
+
 func main() {
-	startRep1()
+	pokeCLient := pokeapi.NewClient(5 * time.Second)
+	cfg := &config{
+		pokeapiClient: pokeCLient,
+	}
+
+	startRep1(cfg)
 }

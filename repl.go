@@ -7,7 +7,7 @@ import (
 	"strings"
 )
 
-func startRep1() {
+func startRep1(cfg *config) {
 
 	reader := bufio.NewScanner(os.Stdin)
 
@@ -28,29 +28,11 @@ func startRep1() {
 			continue
 		}
 
-		err := command.callback()
+		err := command.callback(cfg)
 		if err != nil {
 			fmt.Println(err)
 		}
 	}
-}
-
-func commandExit() error {
-	fmt.Println("Closing the Pokedex... Goodbye!")
-	os.Exit(0)
-	return nil
-}
-
-func commandHelp() error {
-	fmt.Println()
-	fmt.Println("Welcome to the Pokedex!")
-	fmt.Println("Usage:")
-	fmt.Println()
-	for _, cmd := range getCommands() {
-		fmt.Printf("%s: %s\n", cmd.name, cmd.description)
-	}
-	fmt.Println()
-	return nil
 }
 
 func cleanInput(text string) []string {
